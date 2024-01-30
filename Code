@@ -1,0 +1,30 @@
+// Define the pin to which the sensor is connected
+const int alcoholSensorPin = A0;
+
+void setup() {
+  Serial.begin(9600);  // Initialize serial communication for debugging
+}
+
+void loop() {
+  // Read analog value from the alcohol sensor
+  int alcoholValue = analogRead(alcoholSensorPin);
+
+  // Convert analog value to a voltage (0 to 5V)
+  float voltage = (alcoholValue / 1024.0) * 5.0;
+
+  // Print the alcohol value and voltage to the serial monitor
+  Serial.print("Alcohol Value: ");
+  Serial.print(alcoholValue);
+  Serial.print("\tVoltage: ");
+  Serial.print(voltage);
+  Serial.println(" V");
+
+  // Check the alcohol concentration threshold (adjust as needed)
+  float thresholdVoltage = 1.5; // Example threshold voltage
+  if (voltage > thresholdVoltage) {
+    Serial.println("Alcohol detected! Take necessary precautions.");
+    // You can trigger additional actions here, such as turning on an alarm or sending a notification.
+  }
+
+  delay(1000);  // Delay for stability
+}
